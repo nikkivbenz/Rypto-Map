@@ -1,26 +1,44 @@
 import React, { useState, useContext } from 'react';
 import { Container, Form, Button, Alert } from 'react-bootstrap';
-import { MapMarkers } from './MapMarkers';
+import { MarkersContext } from './MarkersContext';
+import axios from 'axios';
+
 
 function CoffeeForm() {
     const [address, setAddress] = useState('');
-    const [showAlert, setShowAlert] = useState(false);
+    const [error, setError] = useState('');
     const { addMarker } = useContext(MarkersContext);
-  
+
     const handleSubmit = async (event) => {
-      event.preventDefault();
-  
-      // Here you would call the geocoding service
-      const isValid = address.includes("Long Beach, CA");
-      if (isValid) {
-        const newMarker = { /* Your geolocation data */ };
-        addMarker(newMarker);
-        setAddress(''); // Reset the address input
-        setShowAlert(false);
-      } else {
-        setShowAlert(true);
-      }
+        event.preventDefault();
+        setError('');
+        setShowAlert(false); // Reset showAlert state
+
+        try {
+            const response = await axios.get(`https://nominatim.openstreetmap.org/search`, {
+                params: {
+                    format: 'json',
+                    q: address
+                }
+            });
+
+            if (response.data && response.data.length > 0) {
+                const loc = response.data[0];
+                addMarker({
+                    position: [parseFloat(loc.lat), parseFloat(loc.lon)],
+                    label: address
+                });
+                setAddress('');
+            } else {
+                setError('No results found for the given address.');
+                setShowAlert(true); // Set showAlert to true if no results found
+            }
+        } catch (err) {
+            setError('An error occurred while searching for the address.');
+            setShowAlert(true); // Set showAlert to true if an error occurred
+        }
     };
+
   
 
   return (
@@ -43,7 +61,7 @@ function CoffeeForm() {
       </Form>
 
 
-      <Alert  variant="danger" show={showAlert} className="mt-3">
+      <Alert  variant="danger" show={setShowAlert} className="mt-3">
         Address is not valid. Please enter an address in Long Beach, California.
       </Alert>
     </Container>
