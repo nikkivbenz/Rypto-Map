@@ -1,18 +1,20 @@
 import './App.css';
 
-import { MapPage } from "./pages";
+import { MapPage, CoffeeForm }from "./pages";
 import { Row, Col} from 'react-bootstrap';
 
 function App() {
   return (
-    <div> 
-      <h1> One of Kind!</h1> 
-      <p> Connect your metamask wallet, add coffee shops to the map and get rewarded for adding shops </p>
+    <div id = "siteLayout"> 
+      <h1> One of Kind: Long Beach Edition! </h1> 
+      <p> Connect your metamask wallet, add coffee shops to the map and get rewarded for adding *unique* spots! </p>
       <Row> 
-        <Col> 
-        <div className="App">
+        <Col className = "col col-lg-4" > 
+          <CoffeeForm /> 
+        </Col>
+        <Col className = "col"> 
         < MapPage /> 
-      </div></Col>
+        </Col>
       </Row>  
     </div> 
   );
