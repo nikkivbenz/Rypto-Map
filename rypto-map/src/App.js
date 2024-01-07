@@ -3,6 +3,9 @@ import './App.css';
 import { MapPage, CoffeeForm }from "./pages";
 import { Row, Col} from 'react-bootstrap';
 
+import {useState, React } from 'react'; 
+import { MarkerContext } from './pages/MarkerContext';
+
 function App() {
   return (
     <div id = "siteLayout"> 
