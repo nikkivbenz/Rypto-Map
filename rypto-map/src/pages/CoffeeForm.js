@@ -2,13 +2,14 @@ import React, {useState} from 'react';
 import { Container, Form, Button, Alert } from 'react-bootstrap';
 
 const CoffeeForm = () => {
-    const [address, setAddress] = useState('');
-    const [coffeeShop, setCoffeeShop] = useState('');
-    const [showAlert, setShowAlert] = useState(false); 
-    const [isSubmitting, setIsSubmitting] = useState(false);
-    const [Coord, setCoord] = useState(''); 
-    const [coordAlert, showCoordAlert] = useState(false); 
+    const [address, setAddress] = useState(''); // setting address for Lat/Long API (Nominatim) and for smart contract 
+    const [coffeeShop, setCoffeeShop] = useState(''); //setting the coffeeShop name for smart contract 
+    const [showAlert, setShowAlert] = useState(false);  // for alerting of an invalid address inputted
+    const [isSubmitting, setIsSubmitting] = useState(false); //for disabling the button once an address is sumitted; don't overwhelm Nominatim 
+    const [Coord, setCoord] = useState(''); //Sets coordinates from address -> coordinates API 
+    const [coordAlert, showCoordAlert] = useState(false); //Shows Coordinates when valid address is inputed 
 
+    //converts address into longitutde and latitude coordinates
     const getGeolocation = async (address) => {
       try {
           const url = `https://nominatim.openstreetmap.org/search?format=json&q=${encodeURIComponent(address)}`;
@@ -22,6 +23,7 @@ const CoffeeForm = () => {
   
           if (data.length > 0) {
               const { lat, lon } = data[0];
+              //sets coordinates for the component to use 
               setCoord(`Latitude: ${lat}, Longitude: ${lon}`);
               return { lat, lon };
           } else {
@@ -34,6 +36,7 @@ const CoffeeForm = () => {
       }
   };
 
+    //checks if the address inputted returned valid coordinates
     const isValidAddress = (address) => {
         const geoloc = getGeolocation(address); 
         if (geoloc == null) {
@@ -46,6 +49,8 @@ const CoffeeForm = () => {
 
     };
 
+    //when the form is submitted, if valid address, it will show the coordinates to the user
+    //if invalid, shows the alert for it
     const handleSubmit = (event) => {
         event.preventDefault();
         setIsSubmitting(true);
@@ -58,9 +63,11 @@ const CoffeeForm = () => {
           showCoordAlert(true); 
 
         }
+
+        //disables the submit button for one minute after submitting
         setTimeout(() => {
-          console.log('Form submitted');
-          setIsSubmitting(false); // Re-enable the button after 5 seconds
+          console.log('Cooldown Done!');
+          setIsSubmitting(false); 
           showCoordAlert(false); 
               }, 60000);
 
@@ -68,6 +75,7 @@ const CoffeeForm = () => {
 
     return (
       <Container className="mt-5">
+        {/* sets the alert for an invalid address  */}
           {showAlert && <Alert variant="danger">Please enter a valid address in Long Beach.</Alert>}
           <Form onSubmit={handleSubmit}>
                 <Form.Group>
@@ -88,11 +96,13 @@ const CoffeeForm = () => {
                         placeholder="Enter coffee shop name"
                     />
                 </Form.Group>
-                <Button id= "formSubmitBtn" variant="primary" type="submit disabled={isSubmitting}">
+                <Button id= "formSubmitBtn" variant={isSubmitting ? "danger" : "primary"}  type="submit disabled={isSubmitting}">
+                  {/* if button disabled, submitted shows  */}
                   {isSubmitting ? 'Submitted' : 'Submit'}
                 </Button>
             </Form>
-            {coordAlert && <Alert variant="danger">{Coord}</Alert>}
+            {/* displays the coordinates if valid address submitted */}
+            {coordAlert && <Alert variant="success">{Coord}</Alert>}
         </Container>
     );
 };
