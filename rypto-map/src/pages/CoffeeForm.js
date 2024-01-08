@@ -3,11 +3,11 @@ import { Container, Form, Button, Alert } from 'react-bootstrap';
 
 function CoffeeForm() {
 
-  //interacting with bsc 
+  //interacting with bsc chain
 
   return (
       <Container className="mt-5">
-      <Form id="addressForm" onSubmit={handleSubmit}>
+      {/* <Form id="addressForm" onSubmit={handleSubmit}>
         <Form.Group>
           <Form.Label htmlFor="address">Address</Form.Label>
           <Form.Control
@@ -25,7 +25,7 @@ function CoffeeForm() {
       </Form>
       <Alert  variant="danger" show={showCityAlert} className="mt-3">
         Address is not valid. Please enter an address in Long Beach, California.
-      </Alert>
+      </Alert> */}
     </Container>          
   );
 }
