@@ -1,7 +1,7 @@
 import './App.css';
-import React, { useState } from 'react';
+import React from 'react';
 
-import { MapPage, CoffeeForm }from "./pages";
+import { MapPage, CoffeeForm, Footer }from "./pages";
 import { Row, Col} from 'react-bootstrap';
 
 import { MetaMaskButton, useAccount, useSDK, useSignMessage} from '@metamask/sdk-react-ui';
@@ -44,18 +44,6 @@ function AppReady() {
 
 function App() {
 
-  // const [account, setAccount] = useState();
-  // const { sdk, connected, connecting, provider, chainId } = useSDK();
-
-  // const connect = async () => {
-  //   try {
-  //     const accounts = await sdk?.connect();
-  //     setAccount(accounts?.[0]);
-  //   } catch(err) {
-  //     console.warn(`failed to connect..`, err);
-  //   }
-  // };
-
   const { ready } = useSDK();
 
   if (!ready) {
@@ -70,19 +58,6 @@ function App() {
       <p> Connect your metamask wallet, add coffee shops to the map and get rewarded for adding *unique* spots! </p>
       </Col> 
       <Col> 
-      {/* <button style={{ padding: 10, margin: 10 }} onClick={connect}>
-        Connect MetaMask Wallet 
-      </button>
-      {connected && (
-        <div>
-          <>
-            {chainId && `Connected chain: ${chainId}`}
-            <p></p>
-            {account && `Connected account: ${account}`}
-          </>
-        </div>
-      )} */}
-
         <AppReady />
       </Col>
       </Row> 
@@ -94,6 +69,7 @@ function App() {
         < MapPage /> 
         </Col>
       </Row>  
+      <Footer /> 
     </div> 
   );
 }
