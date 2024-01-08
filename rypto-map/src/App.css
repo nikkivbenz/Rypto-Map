@@ -1,5 +1,9 @@
 
-/* #map { height: 20rem; width: 20rem; } */
+#map { 
+  z-index: 1;
+  max-width: 50rem; /* Adjust this value to your preference */
+  height:35rem; /* Adjust height as needed */
+ }
 
 #siteLayout {
   margin-left: 10rem; 
@@ -9,4 +13,9 @@
 
 #formSubmitBtn {
   margin-top: 1rem; 
+}
+
+
+#titleDescription{
+  margin-bottom: 5rem; 
 }

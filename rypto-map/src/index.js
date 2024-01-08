@@ -4,20 +4,20 @@ import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import { MetaMaskProvider } from '@metamask/sdk-react';
+import { MetaMaskUIProvider } from '@metamask/sdk-react-ui';
 
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
     <React.StrictMode>
-      <MetaMaskProvider debug={false} sdkOptions={{
-            dappMetadata: {
-              name: "Rypto Coffee Map",
-              url: window.location.host,
-            }
-          }}>
+      <MetaMaskUIProvider sdkOptions={{
+        dappMetadata: {
+          name: "Rypto Coffee Map",
+          url: window.location.host,
+        }
+      }}>
         <App />
-      </MetaMaskProvider>
+      </MetaMaskUIProvider>
   </React.StrictMode>
 );
 

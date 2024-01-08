@@ -9,7 +9,7 @@ const MapPage = () => {
   const defaultPosition = [33.77005, -118.19374]; // Long Beach, CA
 
   return (
-    <MapContainer center={defaultPosition} zoom={13} style={{ height: '500px', width: '100%' }}>
+    <MapContainer id="map" center={defaultPosition} zoom={13}>
       <TileLayer
         url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
         attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
