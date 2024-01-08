@@ -1,33 +1,56 @@
-import React from 'react';
+import React, {useState} from 'react';
 import { Container, Form, Button, Alert } from 'react-bootstrap';
 
-function CoffeeForm() {
+const CoffeeForm = () => {
+    const [address, setAddress] = useState('');
+    const [coffeeShop, setCoffeeShop] = useState('');
 
-  //interacting with bsc chain
+    const isValidAddress = (address) => {
+        // Implement your logic to validate if the address is in Long Beach.
+        // This is a placeholder logic.
+        return address.toLowerCase().includes('long beach');
+    };
 
-  return (
+    const handleSubmit = (event) => {
+        event.preventDefault();
+        if (!isValidAddress(address)) {
+            Alert('Please enter a valid address in Long Beach.');
+        } else {
+            console.log('Address:', address, 'Coffee Shop:', coffeeShop);
+            //get api cooridnates 
+        }
+    };
+
+    return (
       <Container className="mt-5">
-      {/* <Form id="addressForm" onSubmit={handleSubmit}>
-        <Form.Group>
-          <Form.Label htmlFor="address">Address</Form.Label>
-          <Form.Control
-            type="text"
-            id="address"
-            placeholder="Enter address in Long Beach, CA"
-            value={address}
-            onChange={(e) => setAddress(e.target.value)}
-          />
-        </Form.Group>
-      <Button variant="primary" type="submit" id = "formSubmitBtn" >
-          Submit
-        </Button>
+        <Form onSubmit={handleSubmit}>
+            <div>
+                <label>
+                    Address:
+                    <input
+                        type="text"
+                        value={address}
+                        onChange={(e) => setAddress(e.target.value)}
+                        placeholder="Enter address in Long Beach"
+                    />
+                </label>
+            </div>
+            <div>
+                <label>
+                    Coffee Shop Name:
+                    <input
+                        type="text"
+                        value={coffeeShop}
+                        onChange={(e) => setCoffeeShop(e.target.value)}
+                        placeholder="Enter coffee shop name"
+                    />
+                </label>
+            </div>
+            <Button type="submit">Submit</Button>
+        </Form>
+        </Container>
+    );
+};
 
-      </Form>
-      <Alert  variant="danger" show={showCityAlert} className="mt-3">
-        Address is not valid. Please enter an address in Long Beach, California.
-      </Alert> */}
-    </Container>          
-  );
-}
+export default CoffeeForm;
 
-export default CoffeeForm; 
