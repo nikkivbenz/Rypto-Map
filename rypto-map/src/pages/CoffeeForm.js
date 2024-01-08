@@ -9,9 +9,16 @@ const CoffeeForm = () => {
     const [Coord, setCoord] = useState(''); //Sets coordinates from address -> coordinates API 
     const [coordAlert, showCoordAlert] = useState(false); //Shows Coordinates when valid address is inputed 
 
+    //ensures address inputted is in long beach california
+    function inLongBeachCA(str) {
+      const lowerCaseStr = str.toLowerCase();
+      return lowerCaseStr.includes('long beach') && lowerCaseStr.includes('ca');
+  }
+
     //converts address into longitutde and latitude coordinates
     const getGeolocation = async (address) => {
       try {
+        console.log(" I am in getGeolocation"); 
           const url = `https://nominatim.openstreetmap.org/search?format=json&q=${encodeURIComponent(address)}`;
           
           const response = await fetch(url);
@@ -52,24 +59,33 @@ const CoffeeForm = () => {
     //when the form is submitted, if valid address, it will show the coordinates to the user
     //if invalid, shows the alert for it
     const handleSubmit = (event) => {
-        event.preventDefault();
+      event.preventDefault();
+
+      //checks if address is in long beach california, then it requests its coordinates
+      if (inLongBeachCA(address)){
         setIsSubmitting(true);
-        if (!isValidAddress(address)) {
-          setShowAlert(true);
-        } else {
+      
+        //if the address is a valid address, then it sets the data for submission to smart contract 
+        if(isValidAddress){
           setShowAlert(false); 
           setAddress(address)
           setCoffeeShop(coffeeShop)
           showCoordAlert(true); 
-
+        } else{
+          setShowAlert(true);
         }
+          //disables the submit button for one minute after submitting
+          setTimeout(() => {
+            console.log('Cooldown Done!');
+            setIsSubmitting(false); 
+            showCoordAlert(false); 
+          }, 60000);
+      }else{
+        setShowAlert(true);
+      }
 
-        //disables the submit button for one minute after submitting
-        setTimeout(() => {
-          console.log('Cooldown Done!');
-          setIsSubmitting(false); 
-          showCoordAlert(false); 
-              }, 60000);
+   
+
 
     };
 
