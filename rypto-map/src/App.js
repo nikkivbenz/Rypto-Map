@@ -1,7 +1,7 @@
 import './App.css';
 import React from 'react';
 
-import { MapPage, CoffeeForm, Footer }from "./pages";
+import { MapPage, CoffeeForm, Footer, NavigationBar }from "./pages";
 import { Row, Col} from 'react-bootstrap';
 
 import { MetaMaskButton, useAccount, useSDK, useSignMessage} from '@metamask/sdk-react-ui';
@@ -22,6 +22,7 @@ function AppReady() {
   const { isConnected } = useAccount();
 
   return (
+    <div> 
     <div className="App">
       <header className="App-header">
         <MetaMaskButton theme={'light'} color="white"></MetaMaskButton>
@@ -38,6 +39,7 @@ function AppReady() {
         )}
       </header>
     </div>
+    </div>
   );
 }
 
@@ -52,6 +54,7 @@ function App() {
   
   return (
     <div id = "siteLayout"> 
+    <NavigationBar />
     <Row id="titleDescription"> 
       <Col> 
       <h1> One of Kind: Long Beach Edition! </h1> 
