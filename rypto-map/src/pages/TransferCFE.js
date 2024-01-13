@@ -402,6 +402,7 @@ const TransferCoffeeCoin = () => {
 
   return (
     <div>
+        <button onClick={connectWallet}>Connect MetaMask</button>
       <button onClick={sendTokens}>Send 20 Tokens</button>
     </div>
   );
