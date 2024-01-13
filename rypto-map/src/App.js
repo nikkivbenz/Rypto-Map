@@ -1,7 +1,7 @@
 import './App.css';
 import React from 'react';
 
-import { MapPage, CoffeeForm, Footer, NavigationBar }from "./pages";
+import { MapPage, CoffeeForm, Footer, NavigationBar, TransferCFE }from "./pages";
 import { Row, Col} from 'react-bootstrap';
 
 import { MetaMaskButton, useAccount, useSDK, useSignMessage} from '@metamask/sdk-react-ui';
@@ -67,6 +67,7 @@ function App() {
       <Row> 
         <Col className = "col col-lg-4" > 
           <CoffeeForm /> 
+          <TransferCFE/> 
         </Col>
         <Col className = "col"> 
         < MapPage /> 
