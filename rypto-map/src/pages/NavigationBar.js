@@ -10,7 +10,7 @@ function NavigationBar() {
         <Nav.Link eventKey="link-1">technologies implemented</Nav.Link>
       </Nav.Item>
       <Nav.Item>
-        <Nav.Link eventKey="link-2">github</Nav.Link>
+        <Nav.Link href="https://github.com/nikkivbenz">github</Nav.Link>
       </Nav.Item>
       <Nav.Item>
         <Nav.Link eventKey="link-3">about developer</Nav.Link>
