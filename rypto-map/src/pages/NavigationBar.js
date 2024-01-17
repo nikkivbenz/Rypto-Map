@@ -30,14 +30,13 @@ function NavigationBar() {
 
     <Modal show={showModal} onHide={toggleModal}>
     <Modal.Header closeButton>
-      <Modal.Title>about rypto coffee map!</Modal.Title>
+      <Modal.Title>about rypto coffee map! </Modal.Title>
     </Modal.Header>
     <Modal.Body>
       <Card>
         <Card.Body>
-          <Card.Title>Card Title</Card.Title>
           <Card.Text>
-            Some quick example text to build on the card title and make up the bulk of the card's content.
+            Add coffee shops around Long Beach and get rewarded with CoffeeCoin. You can purchase NFT's (only with CoffeeCoin) HERE!
           </Card.Text>
         </Card.Body>
       </Card>
